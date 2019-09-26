@@ -22,20 +22,80 @@ const catalogue = [
   "The Origin of Species by Charles Darwin (50)"
 ];
 
+// checkBook function using while loop
+
+// function checkBook(title) {
+//   if (!title) throw new Error("Please provide a title");
+  
+//   let result = false
+//   let i = 0;
+//   while (i < catalogue.length) {
+//    const book = catalogue[i];
+//    let bookLC = book.toLowerCase();
+//    let titleLC = title.toLowerCase();
+   
+//    if (bookLC.includes(titleLC)) {
+//       result = true
+  
+//    }
+//    i++; 
+//    }
+//    return result
+//   } 
+
+// checkBook function using FOR loop
+
 function checkBook(title) {
   if (!title) throw new Error("Please provide a title");
-  // Your code here
-}
+
+  for (let i = 0; i < catalogue.length; i = i + 1) {
+   const book = catalogue[i];
+   let bookLC = book.toLowerCase();
+   let titleLC = title.toLowerCase();
+   
+   if (bookLC.includes(titleLC)) {
+      return true;
+   }
+  }
+   return false;
+}   
 
 function countBooksByKeyword(keyword) {
   if (!keyword) throw new Error("Please provide a keyword");
-  // Your code here
+  let count = 0;
+  let i = 0;
+  while (i < catalogue.length) {
+   const book = catalogue[i];
+   let bookLS = book.toLowerCase();
+   let keywordLS = keyword.toLowerCase();
+       
+   if (bookLS.includes(keywordLS)) { count = count + 1;
+}
+i++;
+
+}
+return count;
 }
 
 function getBooksByAuthor(author) {
   if (!author) throw new Error("Please provide an author");
-  // Your code here
-}
+    let i = 0;
+    let searchResults = [] 
+    let splitBook
+    while (i < catalogue.length) {
+     const book = catalogue[i];
+     let bookLS = book.toLowerCase();
+     let authorLS = author.toLowerCase();
+         
+     if (bookLS.includes(authorLS)) { 
+       splitBook = book.split(" by ");
+       searchResults.push(splitBook[0]);
+      }
+    i++;
+    }
+  return searchResults
+  }
+
 
 function getStockCount(title) {
   if (!title) throw new Error("Please provide a title");

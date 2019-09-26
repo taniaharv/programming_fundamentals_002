@@ -197,6 +197,10 @@ The following questions are intended to be answered with written answers (no cod
 
 4. What data types are considered "complex" data types?
 
+
+
 5. What data types are considered "primitive" data types?
 
 6. In JavaScript it is possible to use `==` ("double equals") or `===` ("triple equals") to compare two values. What is the difference and why do we prefer triple equals?
+
+== doesn't care about the data type and would use coersion to attempt to compare.  As a rule you shouldn't use it
