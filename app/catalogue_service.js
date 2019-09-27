@@ -119,35 +119,87 @@ function getBooksByAuthor(author) {
     return Number(splitQty[0]);
     }
 
-    function stockReview(title) {
-      if (!title) throw new Error("Please provide a title");
-        let i = 0;
-        let searchResults = [] 
-        let splitBook
-        let splitQty
-        while (i < catalogue.length) {
-         const book = catalogue[i];
-         let bookLS = book.toLowerCase();
-         let titleLS = title.toLowerCase();
+// stockReview using if ... else
+
+    // function stockReview(title) {
+    //   if (!title) throw new Error("Please provide a title");
+    //     let i = 0;
+    //     let searchResults = [] 
+    //     let splitBook
+    //     let splitQty
+    //     while (i < catalogue.length) {
+    //      const book = catalogue[i];
+    //      let bookLS = book.toLowerCase();
+    //      let titleLS = title.toLowerCase();
              
-         if (bookLS.includes(titleLS)) { 
-           splitBook = book.split("(");
-           searchResults.push(splitBook[0]);
-           searchResults = splitBook[1]
-           splitQty = searchResults.split(")");
-          }
-        i++;
-        } if (typeof searchResults[0] === "undefined") return "Not in our catalogue";
-        if (Number(splitQty[0]) === 0) {
-          return "Not in Stock";
-        } else if (Number(splitQty[0]) > 0 && Number(splitQty[0])<6) {
-          return "Low Stock";
-          } else if (Number(splitQty[0]) > 5 && Number(splitQty[0])<11) {
-          return "Medium Stock";
-          } else
-          return "High Stock";
+    //      if (bookLS.includes(titleLS)) { 
+    //        splitBook = book.split("(");
+    //        searchResults.push(splitBook[0]);
+    //        searchResults = splitBook[1]
+    //        splitQty = searchResults.split(")");
+    //       }
+    //     i++;
+    //     } if (typeof searchResults[0] === "undefined") return "Not in our catalogue";
+    //     if (Number(splitQty[0]) === 0) {
+    //       return "Not in Stock";
+    //     } else if (Number(splitQty[0]) > 0 && Number(splitQty[0])<6) {
+    //       return "Low Stock";
+    //       } else if (Number(splitQty[0]) > 5 && Number(splitQty[0])<11) {
+    //       return "Medium Stock";
+    //       } else
+    //       return "High Stock";
+    //   }
+
+// stockReview using switch
+
+function stockReview(title) {
+  if (!title) throw new Error("Please provide a title");
+    let i = 0;
+    let searchResults = [] 
+    let splitBook
+    let splitQty
+    let qty = 0
+    while (i < catalogue.length) {
+     const book = catalogue[i];
+     let bookLS = book.toLowerCase();
+     let titleLS = title.toLowerCase();
+         
+     if (bookLS.includes(titleLS)) { 
+       splitBook = book.split("(");
+       searchResults.push(splitBook[0]);
+       searchResults = splitBook[1]
+       splitQty = searchResults.split(")");
       }
-    
+    i++;
+    } if (typeof searchResults[0] === "undefined") return "Not in our catalogue";
+    qty = Number(splitQty[0]);
+    switch (qty){
+      case 0:
+      return "Not in Stock";
+      break;
+      case 1:
+      case 2:
+      case 3:
+      case 4:
+      case 5:
+      return "Low Stock";
+      break;
+      case 6:
+      case 7:
+      case 8:
+      case 9:
+      case 10:
+      return "Medium Stock";
+      break;
+      default:
+      return "High Stock";
+      break;
+  }
+}
+
+
+
+
 
 module.exports = {
   checkBook,
