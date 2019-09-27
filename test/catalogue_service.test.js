@@ -92,7 +92,7 @@ describe("catalogueService", () => {
       expect(catalogueService.getStockCount("betWEen The assassinationS")).toBe(9);
     });
   });
-  
+
   describe.only("catalogueService.stockReview", () => {
     test("it returns Not in Stock for Dracula which has 0 quantity", () => {
       expect(catalogueService.stockReview("Dracula")).toBe("Not in Stock");
