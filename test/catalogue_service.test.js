@@ -93,4 +93,33 @@ describe("catalogueService", () => {
     });
   });
   
+  describe.only("catalogueService.stockReview", () => {
+    test("it returns Not in Stock for Dracula which has 0 quantity", () => {
+      expect(catalogueService.stockReview("Dracula")).toBe("Not in Stock");
+    });
+
+    test("it returns Not in Stock for Dracula which has 0 quantity irrespective of case", () => {
+      expect(catalogueService.stockReview("draCUla")).toBe("Not in Stock");
+    });
+
+    test("it returns Low Stock for Great Expectations which has a quantity of 1", () => {
+      expect(catalogueService.stockReview("Great Expectations")).toBe("Low Stock");
+    });
+
+    test("it returns Medium Stock for Everything I Never Told You which has a quantity of 6", () => {
+      expect(catalogueService.stockReview("Everything I Never Told You")).toBe("Medium Stock");
+    });
+
+    test("it returns Medium Stock for The Catcher in the Rye which has a quantity of 10", () => {
+      expect(catalogueService.stockReview("The Catcher in the Rye")).toBe("Medium Stock");
+    });
+
+    test("it returns High Stock for Bring Up The Bodies which has a quantity of 10", () => {
+      expect(catalogueService.stockReview("Bring Up The Bodies")).toBe("High Stock");
+    });
+
+    test("it returns a Not in our catalogue message when the book is not in the catalogue", () => {
+      expect(catalogueService.stockReview("Famous Five go Camping")).toBe("Not in our catalogue");
+    });
+  });
 })

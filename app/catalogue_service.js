@@ -119,10 +119,35 @@ function getBooksByAuthor(author) {
     return Number(splitQty[0]);
     }
 
-function stockReview(title) {
-  if (!title) throw new Error("Please provide a title");
-  // Your code here
-}
+    function stockReview(title) {
+      if (!title) throw new Error("Please provide a title");
+        let i = 0;
+        let searchResults = [] 
+        let splitBook
+        let splitQty
+        while (i < catalogue.length) {
+         const book = catalogue[i];
+         let bookLS = book.toLowerCase();
+         let titleLS = title.toLowerCase();
+             
+         if (bookLS.includes(titleLS)) { 
+           splitBook = book.split("(");
+           searchResults.push(splitBook[0]);
+           searchResults = splitBook[1]
+           splitQty = searchResults.split(")");
+          }
+        i++;
+        } if (typeof searchResults[0] === "undefined") return "Not in our catalogue";
+        if (Number(splitQty[0]) === 0) {
+          return "Not in Stock";
+        } else if (Number(splitQty[0]) > 0 && Number(splitQty[0])<6) {
+          return "Low Stock";
+          } else if (Number(splitQty[0]) > 5 && Number(splitQty[0])<11) {
+          return "Medium Stock";
+          } else
+          return "High Stock";
+      }
+    
 
 module.exports = {
   checkBook,
