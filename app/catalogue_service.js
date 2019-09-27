@@ -97,10 +97,27 @@ function getBooksByAuthor(author) {
   }
 
 
-function getStockCount(title) {
-  if (!title) throw new Error("Please provide a title");
-  // Your code here
-}
+  function getStockCount(title) {
+    if (!title) throw new Error("Please provide a title");
+      let i = 0;
+      let searchResults = [] 
+      let splitBook
+      let splitQty
+      while (i < catalogue.length) {
+       const book = catalogue[i];
+       let bookLS = book.toLowerCase();
+       let titleLS = title.toLowerCase();
+           
+       if (bookLS.includes(titleLS)) { 
+         splitBook = book.split("(");
+         searchResults.push(splitBook[0]);
+         searchResults = splitBook[1]
+         splitQty = searchResults.split(")");
+        }
+      i++;
+      } if (typeof searchResults[0] === "undefined") return "Not in our catalogue";
+    return Number(splitQty[0]);
+    }
 
 function stockReview(title) {
   if (!title) throw new Error("Please provide a title");
